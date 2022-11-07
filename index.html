@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <!-- Preset html attributes from video-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content = "IE=edge">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>Sticky Notes</title>
+    <!--End of preset-->
+
+    <link rel="stylesheet" href = "src/main.css"> <!-- This is to link the css style code-->
+
+    <script src = "src/main.js" defer></script> <!-- This is to link the javascript code-->
+    <!-- 
+        defer means that javascript only loads once all the html loads within the javascript,
+        helps prevent errors with undefined elements 
+    --> 
+</head>
+
+<body>
+    <!-- We are going to need a main container for the app so it is below with id app-->
+    <div id="app">
+        
+        <!--We can delete the whole styling on the css file and see difference or
+        we can also just play around with it to see how it inacts with 
+        everything but so far this is all we need to actually just take notes
+        and for it to show on screem -->
+        <textarea class="note"> some sample text</textarea> <!-- 
+            This is an example sticky note no style just how it would
+             pop up on website/app, it as basic as a simple text
+             box. 
+        -->
+        <button class="add-note" type="button">+</button>
+    </div>
+</body>
+
+</html>
