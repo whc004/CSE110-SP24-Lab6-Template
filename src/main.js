@@ -18,7 +18,6 @@ now that fucntions work we can just add a event listener to
 when add button is clicked and call the add note function */
 
 //note: syntax has to be () => addNote()
-//do not do this addNote(), won't work
 addNoteButton.addEventListener("click", () => addNote());
 
 /* This fucntion is going to go get all the notes 
