@@ -2,7 +2,7 @@ body {
     /*This is to get rid of automantic bower spacing
     and just to change the background*/
     margin: 0;
-    background:  #009578;
+    background: #964B00;
     /**/
 }
 
@@ -43,8 +43,8 @@ specfically*/
     border-radius: 10px;
     /**/
 
-    /*.15 is to give as a 15% opex box shadow*/
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+    /*.15 is to give as a 20% opex box shadow*/
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.20);
 
     /*does not allow the user to resize the box, without it 
     they can change the size of the box*/
@@ -58,15 +58,14 @@ specfically*/
 }
 
 .add-note{
-    /*Same height as everythign just so we have those 
+    /*Same height as everything just so we have those 
     perfect squares*/
     height: 200px;
 
     /*doesn't sink it down to fit within something I believe*/
     border: none;
 
-    /*not sure what this does, 
-    I am assuming does not outline the box with a line or
+    /*Does not outline the box with a line or
     something of that nature*/
     outline: none;
 
@@ -83,7 +82,7 @@ specfically*/
     change the font family*/
     font-size: 120px;
 
-    /*for a 50% opex black color, still allows green to 
+    /*for a 50% opex black color, still allows brown to 
     somewhat sink but black main color*/
     color:rgba(0, 0, 0, 0.5);
 
@@ -94,7 +93,7 @@ specfically*/
     /*This is for when we are transitioning bewteeen the
     non-hovering and hovering stages to give a nice transtion
     between the two*/
-    transition: background 0.2s;
+    transition: background 0.3s;
 }
 
 /*how we want the add button to look when we know
