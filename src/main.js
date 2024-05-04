@@ -68,7 +68,7 @@ function updateNote(id, newContent) {
 
 //Get all the notes from local storage
 function getNotes() {
-    return JSON.parse(localStorage.getItem("stickynotes-notes") || "[]");
+    return JSON.parse(localStorage.getItem("notesApp-notes") || "[]");
 }
 
 //Get a certain note based of id
@@ -79,7 +79,7 @@ function getNote(id) {
 
 //Saves all notes to local storage
 function saveNotes(notes){
-    localStorage.setItem("stickynotes-notes", JSON.stringify(notes));
+    localStorage.setItem("notesApp-notes", JSON.stringify(notes));
 }
 
 //Deletes a single specific note with double click
