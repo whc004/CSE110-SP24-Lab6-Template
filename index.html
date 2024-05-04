@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
-    <!-- Preset html attributes from video-->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content = "IE=edge">
+
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
     <title>Sticky Notes</title>
-    <!--End of preset-->
 
-    <link rel="stylesheet" href = "src/main.css"> <!-- This is to link the css style code-->
+    <link rel="stylesheet" href = "src/main.css">
+    <script src = "src/main.js" defer></script> 
 
-    <script src = "src/main.js" defer></script> <!-- This is to link the javascript code-->
-    <!-- 
-        defer means that javascript only loads once all the html loads within the javascript,
-        helps prevent errors with undefined elements 
-    --> 
-</head>
+<body>
+    <div id="notes-app"> 
+        <button class="add-note" type="button">Add Note</button>
+    </div>
+</body>
+</html>
 
 <body>
     <!-- We are going to need a main container for the app so it is below with id app-->
