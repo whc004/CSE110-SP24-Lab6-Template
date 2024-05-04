@@ -1,105 +1,48 @@
 body {
-    /*This is to get rid of automantic bower spacing
-    and just to change the background*/
     margin: 0;
-    background: #964B00;
-    /**/
+    background-color: #575757;
 }
 
-/*using the div up section of our app
-to apply styling to it*/
-#app {
+#notes-app {
     display: grid;
-    /*Basically going to display every pixel with 200px
-    of width and if brower is too small will drop it down
-    to the next line */
-    grid-template-columns: repeat(auto-fill, 200px);
-
-    /*details padding around edges of our container*/
-    padding: 24px;
-
-    /*The gap between every single sticky note*/
+    grid-template-columns: repeat(auto-fill, 225px);
+    cursor: pointer;
+    padding: 36px;
     gap: 24px;
 }
 
-/*using the note class to be able to add some styling that 
-specfically*/
-.note {
-    /*same as the grid-template to give us perfectly squared
-    sticky notes */
-    height: 200px;
-
-    /*This means the padding will not increase the width or height 
-    of the sticky note*/
-    box-sizing: border-box;
-    padding: 16px;
-
-    /*with border being none makes it so that square can be 
-    a little bigger */
-    border: none;
-
-    /*This is to add the curved edges around the square, 
-        without it looks like normal square */
-    border-radius: 10px;
-    /**/
-
-    /*.15 is to give as a 20% opex box shadow*/
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.20);
-
-    /*does not allow the user to resize the box, without it 
-    they can change the size of the box*/
-    resize: none;
-
-    /*We are applying a certain font to our notes in this part
-    and then we adding what size we want text as well*/
-    font-family: sans-serif;
-    font-size: 16px;
-    /**/
-}
-
 .add-note{
-    /*Same height as everything just so we have those 
-    perfect squares*/
-    height: 200px;
+    height: 250px;
+    width: 225px;
 
-    /*doesn't sink it down to fit within something I believe*/
     border: none;
-
-    /*Does not outline the box with a line or
-    something of that nature*/
     outline: none;
-
-    /*This is add a 10% opex background, allows 
-    the background color of the whole page to go
-    through the button, kind of like see through*/
+    font-family: monospace;
     background: rgba(0, 0, 0, 0.1);
-
-    /*same as before to add those round edges around the 
-    square*/
     border-radius: 10px;
+    font-size: 60px;
 
-    /*Just the size of the plus symbol, will change if you
-    change the font family*/
-    font-size: 120px;
-
-    /*for a 50% opex black color, still allows brown to 
-    somewhat sink but black main color*/
     color:rgba(0, 0, 0, 0.5);
-
-    /*whenever we go to the hover over that box the 
-    cursor pointer will appear*/
     cursor: pointer;
-
-    /*This is for when we are transitioning bewteeen the
-    non-hovering and hovering stages to give a nice transtion
-    between the two*/
-    transition: background 0.3s;
+    transition: background 1s;
 }
 
-/*how we want the add button to look when we know
-the user is hovering over the add button */
 .add-note:hover {
-    /*when user is hovering the background color
-    is going to darken*/
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.note {
+    height: 250px;
+    width: 225px;
+
+    box-sizing: border-box;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.40);
+
+    resize: none;
+    font-family: sans-serif;
+    font-size: 18px;
+    cursor: pointer;
 }
