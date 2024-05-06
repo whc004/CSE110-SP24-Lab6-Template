@@ -10,5 +10,5 @@ jobs:
         with:
           urls: |
             https://elaine-ch.github.io/Lab6_Part1_Starter/
-          # budgetPath: ./budget.json test performance budgets
+          budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
