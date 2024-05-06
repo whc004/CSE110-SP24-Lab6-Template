@@ -5,9 +5,26 @@ on: [push] # the Github Action will activate "on" the event that you "push" to t
 jobs: # the things being executed
   tests: # the name of your status check, will become important when you do branch protection
     runs-on: ubuntu-latest # which device on Github's server that you are running the Actions on
+    
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+    
     steps:
       - uses: actions/checkout@v4 # using version 4 of Actions
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v14
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
-        run: npm install
-      - name: Unit Test
+        run: npm ci
+        env:
+          CI: true
+      - name: build
+        run: npm run build --if-present
+        env:
+          CI: true
+      - name: Run E2E tests
         run: npm run test # the actual testing line
+        env:
+          CI: true
