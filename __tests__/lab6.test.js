@@ -1,13 +1,7 @@
 describe('Basic user flow for Website', () => {
-  let page;
   // First, visit the lab 8 website
   beforeAll(async () => {
-    page = await browser.newPage();
     await page.goto('https://elaine-ch.github.io/Lab6_Part1_Starter/');
-  });
-
-  afterAll(async () => {
-    await page.close();
   });
 
   // Next, check to make sure that all 20 <product-item> elements have loaded
