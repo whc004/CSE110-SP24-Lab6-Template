@@ -26,7 +26,6 @@ describe('Basic user flow for Website', () => {
     console.log('Checking to make sure <product-item> elements are populated...');
     // Start as true, if any don't have data, swap to false
     let allArePopulated = true;
-    let data, plainValue;
     // Query select all of the <product-item> elements
     const prodItemsData = await page.$$eval('product-item', prodItems => {
       return prodItems.map(item => {
