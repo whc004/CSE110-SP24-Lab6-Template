@@ -1,7 +1,13 @@
 describe('Basic user flow for Website', () => {
+  let page;
   // First, visit the lab 8 website
   beforeAll(async () => {
+    page = await browser.newPage();
     await page.goto('https://elaine-ch.github.io/Lab6_Part1_Starter/');
+  });
+
+  afterAll(async () => {
+    await page.close();
   });
 
   // Next, check to make sure that all 20 <product-item> elements have loaded
@@ -22,16 +28,18 @@ describe('Basic user flow for Website', () => {
     let allArePopulated = true;
     let data, plainValue;
     // Query select all of the <product-item> elements
-    const prodItems = await page.$$('product-item');
-    console.log(`Checking product item 1/${prodItems.length}`);
-    // Grab the .data property of <product-items> to grab all of the json data stored inside
-    data = await prodItems[0].getProperty('data');
-    // Convert that property to JSON
-    plainValue = await data.jsonValue();
+    const prodItemsData = await page.$$eval('product-item', prodItems => {
+      return prodItems.map(item => {
+        // Grab all of the json data stored inside
+        return data = item.data;
+      });
+    });
+    console.log(`Checking product item 1/${prodItemsData.length}`);
     // Make sure the title, price, and image are populated in the JSON
-    if (plainValue.title.length == 0) { allArePopulated = false; }
-    if (plainValue.price.length == 0) { allArePopulated = false; }
-    if (plainValue.image.length == 0) { allArePopulated = false; }
+    firstValue = prodItemsData[0];
+    if (firstValue.title.length == 0) { allArePopulated = false; }
+    if (firstValue.price.length == 0) { allArePopulated = false; }
+    if (firstValue.image.length == 0) { allArePopulated = false; }
     // Expect allArePopulated to still be true
     expect(allArePopulated).toBe(true);
 
@@ -39,6 +47,18 @@ describe('Basic user flow for Website', () => {
     // Right now this function is only checking the first <product-item> it found, make it so that
     // it checks every <product-item> it found
 
+  }, 10000);
+
+  it('Make sure <product-item> elements are populated', async () => {
+    const allArePopulated = await page.$$eval('product-item', prodItems => {
+      return prodItems.every(item => {
+        const data = item.data;
+        return data && data.title && data.title.length > 0 && 
+               data.price && data.price > 0 && 
+               data.image && data.image.length > 0;
+      });
+    });
+    expect(allArePopulated).toBe(true);
   }, 10000);
 
   // Check to make sure that when you click "Add to Cart" on the first <product-item> that
