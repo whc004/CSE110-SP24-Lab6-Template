@@ -57,24 +57,22 @@ function addNote(){
     noteCount++
 }
 
-//Updates Note with new given content
+//updates content of given note
 function updateNote(id, newContent) {
-
-    note = getNote(id)[0];
-    note.content = newContent;
+    notes = getNotes();
+    updatedNote = getNote(notes, id);
+    updatedNote.content = newContent;
     saveNotes(notes);
-    return;
 }
 
 //Get all the notes from local storage
 function getNotes() {
-    return JSON.parse(localStorage.getItem("notesApp-notes") || "[]");
+    return JSON.parse(localStorage.getItem("stickynotes-notes") || "[]");
 }
 
-//Get a certain note based of id
-function getNote(id) {
-    const note = getNotes().filter(note => note.id == id);
-    return note;
+//Get a certain note based of id, and notes array
+function getNote(notes, id) {
+    return notes.filter(note => note.id == id)[0];
 }
 
 //Saves all notes to local storage
