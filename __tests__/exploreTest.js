@@ -7,104 +7,55 @@ describe('Basic user flow for Website', () => {
       return elements.length;
     });
     expect(numOfnotes).toBe(0);
+
   });
 
   it('Checking for adding new note', async () => {
     console.log('Checking for adding new note');
+    const button = await page.$('button');
+    await button.click();
+    const note_count = await page.$$eval('.note', element => element.length);
+    expect(note_count).toBe(1);
+
   });
 
   it('Checking for editing new note (edited note is saved by clicking outside of the note, or pressing tab- a focused note cannot be deleted or saved)', async () => {
     console.log('Checking for editing it new note (edited note is saved by clicking outside of the note, or pressing tab- a focused note cannot be deleted or saved)');
+    await page.click('.note');
+    await page.type('.note', 'editing new note');
+    await page.keyboard.press('Tab');
+    const note_content = await page.$eval('.note', element => element.value);
+    expect(note_content).toBe('editing new note');
 
-  },);
-
+  });
   it('Checking to make sure edit existing note (edited note is saved by clicking outside of the note, or pressing tab- a focused note cannot be deleted or saved)', async () => {
     console.log('Checking to make sure edit existing note (edited note is saved by clicking outside of the note, or pressing tab- a focused note cannot be deleted or saved)');
+    await page.click('.note');
+    await page.keyboard.down('Control');
+    await page.keyboard.press('A');
+    await page.keyboard.up('Control');
+    await page.keyboard.press('Backspace');
+    await page.type('.note', 'edit existing note');
+    await page.keyboard.press('Tab');
+    const note_content = await page.$eval('.note', element => element.value);
+    expect(note_content).toBe('edit existing note');
 
   });
 
   it('Checking notes are saved locally (notes are still there after refreshing page)', async () => {
     console.log('Checking notes are saved locally (notes are still there after refreshing page)');
+    await page.reload();
+    const note_content = await page.$eval('.note', element => element.value);
+    expect(note_content).toBe('edit existing note');
 
   });
 
   it('Checking for deleting note by double clicking on note', async () => {
     console.log('Checking for deleting note by double clicking on note');
-  });
-
-  it('Checking after deleting same as initial page', async () => {
-    const noteCount = await page.$$eval('.note', elements => {
-      return elements.length > 0 ? elements.length : 0;
+    await page.click('.note', { clickCount: 2 });
+    const numOfnotes = await page.$$eval('.note', elements => {
+      return elements.length;
     });
-    expect(noteCount).toBe(0);
-  });
-
-
-
-
-
-  // Check to make sure that the cart in localStorage is what you expect
-  it('Checking the localStorage to make sure cart is correct', async () => {
-    // TODO - Step 5
-    // At this point he item 'cart' in localStorage should be 
-    // '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]', check to make sure it is
-    const storedCart = await page.evaluate(() => {
-      return localStorage.getItem('cart');
-    });
-    expect(JSON.parse(storedCart)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
-  });
-
-  // Checking to make sure that if you remove all of the items from the cart that the cart
-  // number in the top right of the screen is 0
-  it('Checking number of items in cart on screen after removing from cart', async () => {
-    console.log('Checking number of items in cart on screen...');
-    // TODO - Step 6
-    // Go through and click "Remove from Cart" on every single <product-item>, just like above.
-    // Once you have, check to make sure that #cart-count is now 0
-    const prodItems = await page.$$('product-item');
-    for (let i = 0; i < prodItems.length; i++) {
-      await page.evaluate(item => {
-        const shadowRoot = item.shadowRoot;
-        const button = shadowRoot.querySelector('button')
-        button.click()
-      }, prodItems[i]);
-    }
-    const cartCount = await page.$eval('#cart-count', el => el.textContent);
-    expect(cartCount).toBe('0');
-
-  }, 10000);
-
-  // Checking to make sure that it remembers us removing everything from the cart
-  // after we refresh the page
-  it('Checking number of items in cart on screen after reload', async () => {
-    console.log('Checking number of items in cart on screen after reload...');
-    // TODO - Step 7
-    // Reload the page once more, then go through each <product-item> to make sure that it has remembered nothing
-    // is in the cart - do this by checking the text on the buttons so that they should say "Add to Cart".
-    // Also check to make sure that #cart-count is still 0
-    await page.reload();
-    const prodItems = await page.$$('product-item');
-    for (let i = 0; i < prodItems.length; i++) {
-      const text = await page.evaluate(item => {
-        const shadowRoot = item.shadowRoot;
-        const button = shadowRoot.querySelector('button')
-        return button.innerText;
-      }, prodItems[i]);
-      expect(text).toBe('Add to Cart')
-    }
-    const cartCount = await page.$eval('#cart-count', el => el.textContent);
-    expect(cartCount).toBe('0');
-  }, 10000);
-
-  // Checking to make sure that localStorage for the cart is as we'd expect for the
-  // cart being empty
-  it('Checking the localStorage to make sure cart is correct', async () => {
-    console.log('Checking the localStorage...');
-    // TODO - Step 8
-    // At this point he item 'cart' in localStorage should be '[]', check to make sure it is
-    const storedCart = await page.evaluate(() => {
-      return localStorage.getItem('cart');
-    });
-    expect(JSON.parse(storedCart)).toEqual([]);
+    expect(numOfnotes).toBe(0);
   });
 });
